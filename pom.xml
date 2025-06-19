@@ -22,6 +22,7 @@
     </properties>
 
     <modules>
+        <module>MainService</module>
     </modules>
 
     <build>
