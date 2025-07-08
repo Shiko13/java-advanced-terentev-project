@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "trainer-workload-service.fullname" . }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ include "trainer-workload-service.name" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "trainer-workload-service.name" . }}
+    spec:
+      containers:
+        - name: trainer-workload-service
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.service.port }}
+          env:
+            - name: EUREKA_SERVER_URL
+              value: {{ .Values.env.EUREKA_SERVER_URL }}

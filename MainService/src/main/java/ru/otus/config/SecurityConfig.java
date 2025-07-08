@@ -53,7 +53,7 @@ public class SecurityConfig {
                 .csrf()
                 .disable()
                 .authorizeRequests()
-                .antMatchers("/login", "/trainee", "/trainer", "/")
+                .antMatchers("/login", "/trainee", "/trainer", "/actuator/**", "/")
                 .permitAll()
                 .anyRequest()
                 .authenticated()

@@ -1,0 +1,17 @@
+apiVersion: v2
+name: training-app
+description: A Helm chart for deploying a multi-module Java application
+type: application
+version: 1.0.0
+appVersion: "1.0"
+
+dependencies:
+  - name: eureka-server
+    version: 1.0.0
+    repository: "file://../eureka-server"
+  - name: main-service
+    version: 1.0.0
+    repository: "file://../main-service"
+  - name: trainer-workload-service
+    version: 1.0.0
+    repository: "file://../trainer-workload-service"

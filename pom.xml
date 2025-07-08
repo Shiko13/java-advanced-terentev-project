@@ -23,6 +23,8 @@
 
     <modules>
         <module>MainService</module>
+        <module>TrainerWorkloadService</module>
+        <module>CacheEmulatorService</module>
     </modules>
 
     <build>

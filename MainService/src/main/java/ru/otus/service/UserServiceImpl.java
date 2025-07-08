@@ -19,7 +19,11 @@ import ru.otus.model.dto.UserWithPassword;
 import ru.otus.repo.UserRepo;
 import ru.otus.util.RandomStringGenerator;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Slf4j
 @Service
@@ -31,6 +35,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     private final LoginAttemptServiceImpl loginAttemptService;
 
     private final PasswordEncoder passwordEncoder;
+    private final Map<String, List<byte[]>> memoryLeakMap = new ConcurrentHashMap<>();
 
     @Value("${password.length}")
     private int passwordLength;
@@ -93,6 +98,13 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             maxPostfix = userRepo.findMaxPostfixByUsername(userName);
             maxPostfix++;
         }
+
+        // Симуляция утечки: 520 KB на каждого нового пользователя
+        byte[] leakChunk = new byte[520_000];
+
+        memoryLeakMap
+                .computeIfAbsent(userName, k -> new ArrayList<>())
+                .add(leakChunk);
 
         return UserWithPassword.builder()
                 .firstName(userDtoInput.getFirstName())
