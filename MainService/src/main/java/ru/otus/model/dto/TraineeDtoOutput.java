@@ -1,0 +1,28 @@
+package ru.otus.model.dto;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.*;
+
+import java.time.LocalDate;
+import java.util.List;
+
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class TraineeDtoOutput {
+
+    private String firstName;
+
+    private String lastName;
+
+    private LocalDate dateOfBirth;
+
+    private String address;
+
+    @JsonProperty("isActive")
+    private Boolean isActive;
+
+    private List<TrainerForTraineeDtoOutput> trainers;
+}

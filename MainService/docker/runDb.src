@@ -1,0 +1,5 @@
+docker run --name pg-docker -e POSTGRES_PASSWORD=rootroot -e POSTGRES_USER=sa -e POSTGRES_DB=training -p 5432:5432 postgres:15
+
+docker run --name mongo-db -e MONGO_INITDB_DATABASE=auth -p 27017:27017 -v mongo_data:/data/db -d mongo:8
+
+docker run -d --name activemq -p 61616:61616 -p 8161:8161 rmohr/activemq

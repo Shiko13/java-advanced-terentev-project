@@ -1,0 +1,12 @@
+replicaCount: 1
+
+image:
+  repository: salterentev/trainer-workload-service
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  port: 8081
+
+env:
+  EUREKA_SERVER_URL: http://eureka-server:8761/eureka
